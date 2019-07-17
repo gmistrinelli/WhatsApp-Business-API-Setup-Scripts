@@ -29,6 +29,7 @@ services:
   wacore:
     image: docker.whatsapp.biz/coreapp:v${WA_API_VERSION:?Run docker-compose with env var WA_API_VERSION (ex. WA_API_VERSION=2.23.4 docker-compose <command> <options>)}
     command: ["/opt/whatsapp/bin/wait_on_postgres.sh", "/opt/whatsapp/bin/launch_within_docker.sh"]
+    restart: always
     volumes:
      - whatsappMedia:/usr/local/wamedia
     env_file:
@@ -45,8 +46,9 @@ services:
   waweb:
     image: docker.whatsapp.biz/web:v${WA_API_VERSION:?Run docker-compose with env var WA_API_VERSION (ex. WA_API_VERSION=2.23.4 docker-compose <command> <options>)}
     command: ["/opt/whatsapp/bin/wait_on_postgres.sh", "/opt/whatsapp/bin/launch_within_docker.sh"]
+    restart: always
     ports:
-     - "9090:443"
+     - "443:443"
     volumes:
      - whatsappMedia:/usr/local/wamedia
     env_file:
