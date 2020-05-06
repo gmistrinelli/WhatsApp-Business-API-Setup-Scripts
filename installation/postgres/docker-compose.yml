@@ -21,6 +21,10 @@ services:
       POSTGRES_USER: root
     expose:
         - "33060"
+    logging:
+      options:
+        max-file: "5"
+        max-size: "250m"
     ports:
         - "33060:3306"
     volumes:
@@ -40,6 +44,10 @@ services:
       ORCHESTRATION: DOCKER-COMPOSE
     depends_on:
       - "db"
+    logging:
+      options:
+        max-file: "5"
+        max-size: "250m"
     network_mode: bridge
     links:
       - db
@@ -61,6 +69,10 @@ services:
     depends_on:
       - "db"
       - "wacore"
+    logging:
+      options:
+        max-file: "5"
+        max-size: "250m"
     links:
       - db
       - wacore
